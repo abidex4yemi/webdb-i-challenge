@@ -5,11 +5,15 @@
  * @returns {object}
  */
 export default ({ modelName = '', tableName = '', knex = {} }) => {
-	function getAll({ limit }) {
+	function getAll({ limit, sortBy, sortDir }) {
 		const query = knex(tableName);
 
 		if (limit) {
-			return query.limit(limit);
+			query.limit(limit);
+		}
+
+		if (sortBy && sortBy) {
+			query.orderBy(sortBy, sortDir);
 		}
 
 		return query;

@@ -11,8 +11,10 @@ import { OK, responseDataFormat } from '../../helpers';
 export const getAccounts = async (req, res, next) => {
 	try {
 		const limit = req.query.limit;
+		const sortBy = req.query.sortBy;
+		const sortDir = req.query.sortDir;
 
-		const accounts = await Account.getAll({ limit });
+		const accounts = await Account.getAll({ limit, sortBy, sortDir });
 
 		return res.status(OK).json(
 			responseDataFormat({
