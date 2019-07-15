@@ -5,8 +5,14 @@
  * @returns {object}
  */
 export default ({ modelName = '', tableName = '', knex = {} }) => {
-	function getAll() {
-		return knex(tableName);
+	function getAll({ limit }) {
+		const query = knex(tableName);
+
+		if (limit) {
+			return query.limit(limit);
+		}
+
+		return query;
 	}
 
 	function insert(account) {

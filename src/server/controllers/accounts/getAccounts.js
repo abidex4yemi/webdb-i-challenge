@@ -10,7 +10,9 @@ import { OK, responseDataFormat } from '../../helpers';
  */
 export const getAccounts = async (req, res, next) => {
 	try {
-		const accounts = await Account.getAll();
+		const limit = req.query.limit;
+
+		const accounts = await Account.getAll({ limit });
 
 		return res.status(OK).json(
 			responseDataFormat({
