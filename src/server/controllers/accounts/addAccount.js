@@ -1,5 +1,5 @@
 import { Account } from '../../model';
-import { CREATED, responseDataFormat } from '../../helpers';
+import { CREATED, responseDataFormat, createError, CONFLICT } from '../../helpers';
 
 /**
  * Insert new account
@@ -23,6 +23,14 @@ export const addAccount = async (req, res, next) => {
 			})
 		);
 	} catch (error) {
+		if (error.code === 'SQLITE_CONSTRAINT') {
+			return next(
+				createError({
+					status: CONFLICT,
+					message: 'Account name already exist'
+				})
+			);
+		}
 		next(error);
 	}
 };

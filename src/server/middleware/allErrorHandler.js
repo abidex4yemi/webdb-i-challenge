@@ -69,7 +69,10 @@ const resourceConflict = (err, req, res, next) => {
 
 	return res.status(CONFLICT).json({
 		ok: false,
-		errors: [err]
+		errors: {
+			message: err.message,
+			status: err.status
+		}
 	});
 };
 
