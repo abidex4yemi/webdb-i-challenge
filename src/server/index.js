@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { allErrorHandler } from './middleware';
 import { OK, responseDataFormat } from './helpers';
+import { accountRouter } from './routes/accountRouter';
 
 const app = express();
 
@@ -27,6 +28,8 @@ app.get('/', (req, res) => {
 		})
 	);
 });
+
+app.use('/api/v1', [accountRouter]);
 
 // Handle invalid request
 app.all('*', (req, res) => {
