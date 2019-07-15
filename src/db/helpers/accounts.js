@@ -17,9 +17,17 @@ export default ({ modelObjName = '', tableName = '', knex = {} }) => {
 			.first();
 	}
 
+	function update(id, changes) {
+		return knex(tableName)
+			.where({ id })
+			.update(changes)
+			.then(count => (count > 0 ? getById(id) : null));
+	}
+
 	return {
 		modelObjName,
 		insert,
-		getById
+		getById,
+		update
 	};
 };
