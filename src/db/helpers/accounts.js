@@ -24,10 +24,18 @@ export default ({ modelObjName = '', tableName = '', knex = {} }) => {
 			.then(count => (count > 0 ? getById(id) : null));
 	}
 
+	function remove(id) {
+		return knex(tableName)
+			.where({ id })
+			.del()
+			.then(count => (count > 0 ? 1 : null));
+	}
+
 	return {
 		modelObjName,
 		insert,
 		getById,
-		update
+		update,
+		remove
 	};
 };
