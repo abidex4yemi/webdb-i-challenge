@@ -7,7 +7,7 @@ import logger from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 import { allErrorHandler } from './middleware';
-import { OK, createSuccess } from './helpers';
+import { OK, responseDataFormat } from './helpers';
 
 const app = express();
 
@@ -20,10 +20,13 @@ app.use(logger('dev'));
 app.use(helmet());
 
 app.get('/', (req, res) => {
-	return res.status(OK).json(createSuccess({ message: 'Welcome to home route...', data: [] }));
+	return res.status(OK).json(
+		responseDataFormat({
+			message: 'Welcome to home route...',
+			data: []
+		})
+	);
 });
-
-app.use('/api/v1', [actionRouter, projectRouter]);
 
 // Handle invalid request
 app.all('*', (req, res) => {
