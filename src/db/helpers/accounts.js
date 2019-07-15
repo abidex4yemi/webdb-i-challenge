@@ -5,6 +5,10 @@
  * @returns {object}
  */
 export default ({ modelObjName = '', tableName = '', knex = {} }) => {
+	function getAll() {
+		return knex(tableName);
+	}
+
 	function insert(account) {
 		return knex(tableName)
 			.insert(account)
@@ -36,6 +40,7 @@ export default ({ modelObjName = '', tableName = '', knex = {} }) => {
 		insert,
 		getById,
 		update,
-		remove
+		remove,
+		getAll
 	};
 };
