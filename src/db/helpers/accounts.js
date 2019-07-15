@@ -4,7 +4,7 @@
  * @param {object} { modelObjName, tableName, knex }
  * @returns {object}
  */
-export default ({ modelObjName = '', tableName = '', knex = {} }) => {
+export default ({ modelName = '', tableName = '', knex = {} }) => {
 	function getAll() {
 		return knex(tableName);
 	}
@@ -36,7 +36,7 @@ export default ({ modelObjName = '', tableName = '', knex = {} }) => {
 	}
 
 	return {
-		modelObjName,
+		modelName,
 		insert,
 		getById,
 		update,
