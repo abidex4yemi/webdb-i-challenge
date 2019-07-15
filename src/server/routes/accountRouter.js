@@ -1,7 +1,7 @@
 import express from 'express';
 import { validateAccountParam } from '../middleware';
 import { validateAccountBody } from '../middleware/validateAccountBody';
-import { addAccount, getAccounts, getAccountById, deleteAccount } from '../controllers/accounts';
+import { addAccount, getAccounts, getAccountById, deleteAccount, updateAccount } from '../controllers/accounts';
 
 const router = express.Router();
 
@@ -15,6 +15,7 @@ router
 router
 	.route('/accounts/:id')
 	.get(getAccountById)
-	.delete(deleteAccount);
+	.delete(deleteAccount)
+	.put(validateAccountBody, updateAccount);
 
 export { router as accountRouter };
